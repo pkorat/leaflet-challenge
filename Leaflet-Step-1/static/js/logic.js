@@ -17,9 +17,11 @@ d3.json(url).then(function(response) {
     for (var i=0; i < response.features.length; i++) {
 
         var location = response.features[i].geometry
+        var description = response.features[i].properties
 
         if (location) {
-            L.marker([location.coordinates[1], location.coordinates[0]]).addTo(myMap)
+            L.marker([location.coordinates[1], location.coordinates[0]])
+            .bindPopup('<h3>' + description.place + '</h3><h3>Magnitude: ' + description.mag + '</h3>').addTo(myMap)
         }
     }
 })
